@@ -27,7 +27,7 @@
           resource_group: "{{ resource_group }}"
           name: myappplan
           is_linux: false
-          sku: S1
+          sku: S2
           number_of_workers: 1
         frameworks:
           - name: "java"
