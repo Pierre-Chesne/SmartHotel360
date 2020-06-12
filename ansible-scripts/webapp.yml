@@ -48,6 +48,21 @@
         admin_password: "{{ admin_password }}"
         storage_mb: 51200
 
+    - name: Open firewall to access MySQL Server from outside
+      azure_rm_resource:
+        api_version: '2017-12-01'
+        resource_group: "{{ resource_group }}"
+        provider: dbformysql
+        resource_type: servers
+        resource_name: "{{ mysqlserver_name }}"
+        subresource:
+          - type: firewallrules
+            name: externalaccess
+        body:
+          properties:
+            startIpAddress: "0.0.0.0"
+            endIpAddress: "0.0.0.0"
+
     - name: Create instance of MySQL Database
       azure_rm_mysqldatabase:
         resource_group: "{{ resource_group }}"
